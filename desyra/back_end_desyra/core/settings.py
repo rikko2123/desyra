@@ -40,8 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
-    'core_desyra.apps.CoreDesyraConfig'
+    'core_desyra.apps.CoreDesyraConfig',
+    'jet_django'
 ]
+
+#credenziali jet-admin 
+JET_PROJECT = 'new_app_577'
+JET_TOKEN = 'f6974601-9d02-406b-8d92-e2e175489c87'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

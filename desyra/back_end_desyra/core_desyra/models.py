@@ -71,11 +71,11 @@ class Wishlist(models.Model):
     
 class Users(models.Model):
     id_user = models.AutoField(primary_key=True)
-    shipping_address = models.ForeignKey(Shipping_address, on_delete=models.CASCADE, db_column='id_address')
-    wishlist = models.OneToOneField(Wishlist, on_delete=models.CASCADE, db_column='id_wishlist')
-    chart = models.OneToOneField(Chart, on_delete=models.CASCADE, db_column='id_chart')
-    name = models.TextField(max_length=50)
-    surname = models.TextField(max_length=50)
+    shipping_address = models.ForeignKey(Shipping_address, on_delete=models.CASCADE, db_column='id_address', null=True)
+    wishlist = models.OneToOneField(Wishlist, on_delete=models.CASCADE, db_column='id_wishlist', null=True)
+    chart = models.OneToOneField(Chart, on_delete=models.CASCADE, db_column='id_chart', null=True)
+    name = models.CharField(max_length=50)
+    surname = models.CharField(max_length=50)
     email = models.EmailField()
     password = models.CharField(max_length=128)  # attenzione: devi salvare un hash, non la password in chiaro
     
@@ -110,7 +110,7 @@ class Products(models.Model):
     name = models.CharField(max_length=50)
     short_desc = models.CharField(max_length= 250)
     desc = models.TextField(max_length=1000)
-    price = models.DecimalField(max_digits=4, decimal_places= 2)
+    price = models.DecimalField(max_digits=8, decimal_places= 2)
     discount_price = models.DecimalField(max_digits=4, decimal_places= 2)
     code = models.CharField(max_length=20, unique=True)
     stock_aviability = models.IntegerField()
@@ -232,3 +232,5 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField()
     price_each = models.DecimalField(max_digits=8, decimal_places=2)
+    
+    

@@ -1,0 +1,53 @@
+from jet_bridge_base import fields as fields_
+from jet_bridge_base.serializers.serializer import Serializer
+
+
+class ModelDescriptionFieldSerializer(Serializer):
+    name = fields_.CharField()
+    db_column = fields_.CharField()
+    field = fields_.CharField()
+    db_field = fields_.CharField()
+    filterable = fields_.BooleanField()
+    null = fields_.BooleanField()
+    editable = fields_.BooleanField()
+    params = fields_.JSONField()
+    data_source_field = fields_.CharField(required=False)
+    data_source_name = fields_.CharField(required=False)
+    data_source_params = fields_.JSONField(required=False)
+    data_source_order_after = fields_.CharField(required=False)
+    data_source_hidden = fields_.BooleanField(required=False)
+    verbose_name = fields_.CharField(required=False)
+    required = fields_.BooleanField(required=False)
+    default_type = fields_.CharField(required=False)
+    default_value = fields_.RawField(required=False)
+    length = fields_.IntegerField(required=False)
+    related_model = fields_.JSONField(required=False)
+    custom_primary_key = fields_.CharField(required=False)
+
+
+class ModelDescriptionRelationSerializer(Serializer):
+    name = fields_.CharField()
+    direction = fields_.CharField()
+    local_field = fields_.CharField()
+    related_model = fields_.CharField()
+    related_field = fields_.CharField()
+
+
+class ModelDescriptionSerializer(Serializer):
+    model = fields_.CharField()
+    db_table = fields_.CharField()
+    hidden = fields_.BooleanField()
+    primary_key_field = fields_.CharField()
+    primary_key_auto = fields_.BooleanField()
+    is_view = fields_.BooleanField()
+    fields = ModelDescriptionFieldSerializer(many=True)
+    relations = ModelDescriptionRelationSerializer(many=True)
+    relation_overrides = ModelDescriptionRelationSerializer(many=True, required=False)
+    verbose_name = fields_.CharField(required=False)
+    verbose_name_plural = fields_.CharField(required=False)
+    display_field = fields_.CharField(required=False)
+    default_order_by = fields_.CharField(required=False)
+    data_source_name = fields_.CharField(required=False)
+    data_source_name_plural = fields_.CharField(required=False)
+    data_source_order_after = fields_.CharField(required=False)
+    data_source_hidden = fields_.BooleanField(required=False)
