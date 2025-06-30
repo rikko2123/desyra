@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
+    'core_desyra.apps.CoreDesyraConfig'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'desyra_db',
         'USER': "root",
-        'PASSWORD': "",
+        'PASSWORD': "root",
         'HOST': "127.0.0.1",
         'PORT': "3306",
     }
