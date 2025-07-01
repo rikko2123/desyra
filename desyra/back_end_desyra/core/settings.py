@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-s$q5!=p5u_#rg^@-nyrp5kb=k8w)^186qu75cz&*a!n#jjy=ps
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#rendo il cors accessibile agli host che ho specificato al'interno dell'array
+#ALLOWED_HOSTS = ['http://localhost:5173/']
 
 
 # Application definition
