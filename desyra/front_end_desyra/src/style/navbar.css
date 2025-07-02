@@ -71,3 +71,14 @@
     color: black; /* mantiene il colore originale solo su quello sotto il mouse */
     font-weight: 550;
 }
+
+@media (max-width: 768px){
+    .nav-style{
+        height: 3rem;
+    }
+    .nav-style-left,
+    .logo-img,
+    .nav-style-rigth{
+        display: none;
+    }
+}

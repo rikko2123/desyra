@@ -57,4 +57,11 @@
 
 
 
-
+@media (max-width: 768px){
+    .text> h1 {
+        font-size: 3.0rem;
+    }
+    .text> span {
+        font-size: .8rem;
+    }
+}
