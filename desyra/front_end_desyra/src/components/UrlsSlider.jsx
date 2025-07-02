@@ -14,7 +14,7 @@ function urlsSlider() {
     ];
 
     return (
-        <div className='urlSlider' style={{width:'100%', height:'3rem'}}>
+        <div className='urlSlider' style={{width:'100%', height:'2.2rem'}}>
             <Swiper
                 modules={[Autoplay]}
                 autoplay={{ delay: 3000}}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo_desyra.png'
+import '../style/navbar.css'
 
 const nav_element=[
     {type: 'link', label: 'Shop', href: '/shop'},
@@ -15,31 +16,33 @@ const nav_element=[
 
 function NavBar() {
     return (
-        <nav style={{display:'flex', width:'100%', border:'1px solid red'}}>
-            <ul style={
-                    {
-                        display:'flex', 
-                        listStyleType: 'none',
-                        color:'black',
-                        alignItems:'center',
-                        justifyContent:'space-between',
-                        border: '1px solid red',
-                        width: '100%'
-                    }
-                }
-            >
-
-
-                {nav_element.map((nav_item, index) => (
+        <nav style={{display:'flex', width:'100%', height:'4.5rem'}} className='nav-style'>
+            <ul className='nav-style-left'>
+                {/* slice() è un metodo degli array JavaScript che serve per estrarre una porzione dell’array, senza modificarlo. */}
+                {nav_element?.slice(0, 2).map((nav_item, index) => (
                     <li key={index}>
-                        {
-                            nav_item.type == 'link' ? 
-                                <Link to={nav_item.href}>{nav_item.label}</Link>
-                            : 
-                                <img src={nav_item.src} alt="Logo" style={{ height: '30px' }} />
-                        }
+                        
+                        <Link to={nav_item.href} className='nav-link'>{nav_item.label}</Link>
                     </li> 
-                ))}
+            
+                ))}                
+            </ul>
+
+            <div className="logo-img" style={{width:'30%', height:'100%'}}>
+                <Link to={nav_element[2].href} 
+                    style={{width:'70%', height:'100%', display:'flex', alignItems: 'center', justifyContent:'center'}}
+                >
+                    <img src={nav_element[2].src} alt='logo' loading='lazy'/>
+                </Link>
+            </div>
+
+            <ul className='nav-style-rigth'>
+                {/* slice() è un metodo degli array JavaScript che serve per estrarre una porzione dell’array, senza modificarlo. */}
+                {nav_element?.slice(3).map((nav_item, index) => (
+                    <li key={index}>
+                        <Link to={nav_item.href} className='nav-link'>{nav_item.label}</Link>
+                    </li> 
+                ))}                
             </ul>
         </nav>
     )
