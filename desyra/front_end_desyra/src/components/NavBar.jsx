@@ -19,7 +19,7 @@ function NavBar() {
     ]
 
     return (
-        <nav style={{display:'flex', width:'100%', height:'4.5rem'}} className='nav-style'>
+        <nav style={{display:'flex', width:'100%', height:'4.5rem', position: 'sticky', top: '0', zIndex: '100000', backgroundColor: 'white'}} className='nav-style'>
 
             {/* menu mobile */}
             <MobileMenu nav_elements = {nav_element}/>

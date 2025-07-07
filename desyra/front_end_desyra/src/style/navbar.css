@@ -1,3 +1,7 @@
+.nav-style{
+    position: sticky;
+}
+
 .nav-style-left, .nav-style-rigth{
     display:flex; 
     list-style-type: none;
@@ -73,9 +77,7 @@
 }
 
 @media (max-width: 768px){
-    .nav-style{
-        height: 3rem;
-    }
+
     .nav-style-left,
     .logo-img,
     .nav-style-rigth{

@@ -22,9 +22,9 @@ class Shipping_address(models.Model):
 class Brand(models.Model):
     id_brand = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=5000)
-    logo_path = models.ImageField(upload_to="") #da inserirew path immagini
-    web_site = models.URLField(max_length=100)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+    logo_path = models.ImageField(upload_to="", null=True, blank=True) #da inserirew path immagini
+    web_site = models.URLField(max_length=100, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     
     def __str__(self):
@@ -106,18 +106,18 @@ class Users(models.Model):
     
 class Products(models.Model):
     id_product = models.AutoField(primary_key=True)
-    id_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, db_column="id_brand", related_name='brand')
+    id_brand = models.ForeignKey(Brand, on_delete=models.CASCADE, db_column="id_brand", related_name='products')
     name = models.CharField(max_length=50)
-    short_desc = models.CharField(max_length= 250)
-    desc = models.TextField(max_length=1000)
+    short_desc = models.CharField(max_length= 250, null=True, blank=True)
+    desc = models.TextField(max_length=1000, null=True, blank=True)
     price = models.DecimalField(max_digits=8, decimal_places= 2)
-    discount_price = models.DecimalField(max_digits=4, decimal_places= 2)
+    discount_price = models.DecimalField(max_digits=4, decimal_places= 2, null=True, blank=True)
     code = models.CharField(max_length=20, unique=True)
     stock_aviability = models.IntegerField()
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False) #campo che mi permette di gestire la visibilità del campo
-    created_ad = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
     
     def __str__(self):
         return self.name
@@ -140,9 +140,9 @@ class Img_prod(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='id_product', related_name='images')
     alt_text = models.CharField(max_length=15)
     is_main_img = models.BooleanField(default=False)
-    created_ad = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    img_path = models.ImageField(upload_to= "") #da inserirew path immagini
+    created_ad = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    img_path = models.ImageField(upload_to= "", max_length='1000') #da inserirew path immagini
     
 
 class Category(models.Model):
