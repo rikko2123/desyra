@@ -72,4 +72,3 @@ class BrandProductListApiView(APIView):
         serializer = BrandSerializer(brand_product, many=True)
         return Response(serializer.data)
     
-    

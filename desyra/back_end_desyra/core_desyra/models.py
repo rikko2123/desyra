@@ -135,16 +135,6 @@ class Variants(models.Model):
     def __str__(self):
         return self.cod_variante
 
-class Img_prod(models.Model):
-    id_img = models.AutoField(primary_key=True)
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='id_product', related_name='images')
-    alt_text = models.CharField(max_length=15)
-    is_main_img = models.BooleanField(default=False)
-    created_ad = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
-    img_path = models.ImageField(upload_to= "", max_length='1000') #da inserirew path immagini
-    
-
 class Category(models.Model):
     id_category = models.AutoField(primary_key=True)
     #product = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='id_product', related_name='products')
@@ -163,6 +153,18 @@ class Category(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Img_prod(models.Model):
+    id_img = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, db_column='id_product', related_name='images', null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, db_column='id_category', related_name='category_img', null=True, blank=True)
+    alt_text = models.CharField(max_length=15)
+    is_main_img = models.BooleanField(default=False)
+    created_ad = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    img_path = models.ImageField(upload_to= "", max_length='1000') #da inserirew path immagini
+    
+
     
 #! da verificare 
 class Chart_Products(models.Model):

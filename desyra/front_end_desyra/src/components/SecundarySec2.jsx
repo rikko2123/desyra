@@ -1,38 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { data } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import '../style/hero.css'
+import Video2 from '../assets/videohome2.mp4'
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import '../style/hero.css'
-import Video from '../assets/video.mp4'
-
-const btn_style = {
-    border:'none', 
-    borderRadius: '0', 
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    '&:hover': {
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    },
-    maxWidth: '200px',
-    padding: '13px'
-}
-
-//! IMPOSTA CAMBIO DI STATO PER UTENTE REGISTRATO OPPURE UTENTE NON REGISTRATO
 
 
-function VideoSec() {
-    // creo stato per il titolo e desc della hero
+function SecundarySec2() {
+
+    const btn_style = {
+        border:'none', 
+        borderRadius: '0', 
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        },
+        maxWidth: '200px',
+        padding: '13px'
+    }
 
     const [text, setText] = useState('Registrati per ottenere un buono sconto')
 
-    useEffect(() => {
-        fetch('INSERISCI END POINT API USER')
-    })
+    // rallento il video
+    const videoRef = useRef(null);
 
+    useEffect(() => {
+        if (videoRef.current) {
+        videoRef.current.playbackRate = 0.7;
+        }
+    }, []);
+    
     return (
-        <section className='video-hero'>
+        <section className='sec-video-hero'>
             <div className="video-box">
-                <video controls preload="none" autoPlay muted loop >
-                    <source src={Video} type="video/mp4" />
+                <video ref={videoRef} controls preload="none" autoPlay muted loop >
+                    <source src={Video2} type="video/mp4" />
                 </video>
             </div> 
 
@@ -53,8 +54,8 @@ function VideoSec() {
             <div className="overlay">
                     
                 <div className="video-text-box">
-                    <div className="video-text">
-                        <h1>UNISCITI A NOI</h1> 
+                    <div className="sec-video-text">
+                        <h1 >LA NOSTRA MISSIONE</h1> 
                         <span>{text}</span>
                     </div>
                     <Button variant="outlined" sx={btn_style}><Link to='/' style={{color: 'white'}}>SING IN</Link></Button>
@@ -65,4 +66,4 @@ function VideoSec() {
     )
 }
 
-export default VideoSec
+export default SecundarySec2

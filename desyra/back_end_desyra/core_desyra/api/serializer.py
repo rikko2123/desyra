@@ -32,7 +32,9 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class CategorysSerializer(serializers.ModelSerializer):
+    #unisco immagini categorie
+    category_img = ImgSerializer(many = True, read_only = True)
     class Meta:
         model = Category
-        fields = ['id_category', 'name', 'short_desc', 'desc']
+        fields = '__all__'
         
