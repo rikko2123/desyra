@@ -56,6 +56,11 @@
 }
 
 
+.nav_slide_box{
+    border: 1px solid black;
+}
+
+
 
 @media (max-width: 768px){
     .text> h1 {

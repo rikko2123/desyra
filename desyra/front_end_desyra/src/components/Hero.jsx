@@ -22,6 +22,7 @@ function Hero() {
 
     const [titleData, setTitleData] = useState('')
 
+
     useEffect(() => {
         fetch('http://127.0.0.1:8000/api/category/')
         .then(response => response.json())
@@ -30,6 +31,7 @@ function Hero() {
 
     return (
         <section className='hero'>
+
             <div className="img-box">
                 <img src={Heroimg} alt="hero" />
             </div> 

@@ -15,6 +15,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .card-img > img {
@@ -54,3 +55,4 @@
     display: flex;
     flex-direction: column;
 }
+

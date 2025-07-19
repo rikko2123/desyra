@@ -58,7 +58,7 @@ function SecundarySec2() {
                         <h1 >LA NOSTRA MISSIONE</h1> 
                         <span>{text}</span>
                     </div>
-                    <Button variant="outlined" sx={btn_style}><Link to='/' style={{color: 'white'}}>SING IN</Link></Button>
+                    <Button variant="outlined" sx={btn_style}><Link to='/' style={{color: 'white'}}>LEARN MORE</Link></Button>
                 </div>
             </div>  
                        

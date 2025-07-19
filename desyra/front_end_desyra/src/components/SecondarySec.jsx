@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { data } from 'react-router-dom'
-import '../style/Secondarysec.css'
-import gsap from 'gsap';
-import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import '../style/secondarysec.css'
+// import gsap from 'gsap';
+// import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+//
 
-function SecondarySec() {
+function SecondarySec({category, setCategory}) {
 
-    const [category, setCategory] = useState([])
+    // const [category, setCategory] = useState([])
 
-    // // animazione scroll
+    // // // animazione scroll
+    // // useEffect(() => {
+    // //     gsap.registerPlugin(ScrollTrigger);
+
+    // //     ScrollTrigger.create({
+    // //         trigger: '.pin-me',
+    // //         start: 'top top',
+    // //         end: '+=1000', // distanza dello scroll
+    // //         pin: true,
+    // //         scrub: false, // se vuoi che segua lo scroll metti true
+    // //         markers: true // opzionale per debug
+    // //     });
+    // // }, []);
+
     // useEffect(() => {
-    //     gsap.registerPlugin(ScrollTrigger);
-
-    //     ScrollTrigger.create({
-    //         trigger: '.pin-me',
-    //         start: 'top top',
-    //         end: '+=1000', // distanza dello scroll
-    //         pin: true,
-    //         scrub: false, // se vuoi che segua lo scroll metti true
-    //         markers: true // opzionale per debug
-    //     });
-    // }, []);
-
-    useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/category/')
-        .then(response => response.json())
-        .then(data => setCategory(data))
-    }, [])
+    //     fetch('http://127.0.0.1:8000/api/category/')
+    //     .then(response => response.json())
+    //     .then(data => setCategory(data))
+    // }, [])
 
     const imgDefault = category[0]?.category_img?.[0]?.img_path
     const [selcat, setSelCat] = useState('')
@@ -72,7 +72,19 @@ function SecondarySec() {
             </div>
 
             <div style={{display:'flex', flex:'1', height:'100%', width:'100%'}} className='sec-img-box'>
-                {hover ? <img src={selcat} alt="" style={{height:'100%', width:'100%', objectFit:'cover', opacity: '1', transition: 'opacity 0.5s ease-in-out'}} className='sec-img-hover'/> : <img src={decodeURIComponent(imgDefault).replace(/^\//, '').replace(/^https:\//, 'https://')} alt="" style={{height:'100%', width:'100%', objectFit:'cover', opacity: '1', transition: 'opacity 0.5s ease-in-out'}} className='sec-img-default'/>}
+                {hover ? <img 
+                                src={selcat} 
+                                alt="" 
+                                style={{height:'100%', width:'100%', objectFit:'cover', opacity: '1', transition: 'opacity 0.5s ease-in-out'}} 
+                                className='sec-img-hover'/> 
+                    : 
+                    <img 
+                        src={decodeURIComponent(imgDefault).replace(/^\//, '').replace(/^https:\//, 'https://')} 
+                        alt="" 
+                        style={{height:'100%', width:'100%', objectFit:'cover', opacity: '1', transition: 'opacity 0.5s ease-in-out'}} 
+                        className='sec-img-default'/>
+                }
+
             </div>
         </section>
     )

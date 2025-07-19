@@ -36,7 +36,8 @@ function JurneySec() {
                     justifyContent:'space-evenly', 
                     paddingLeft:'20px', 
                     paddingRight:'20px', 
-                    overflow:'hidden'
+                    overflow:'hidden',
+                    flexWrap: 'wrap'
                 }}
                 spaceBetween={20} 
             >
