@@ -6,5 +6,5 @@ desyra/front_end_desyra/node_modules
 
 .gitignore
 .env
-_pycache_
+_pycache_/
 README.md
