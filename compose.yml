@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    healthcheck: # <--- Aggiungi questo blocco al servizio 'db'
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p", "root"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s # Dà al DB 20 secondi per avviarsi prima di iniziare i tentativi.
+    environment:
+      MYSQL_DATABASE: desyra_db
+      MYSQL_USER: rikko2123
+      MYSQL_PASSWORD: rikko
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "6001:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - db_net
+
+  be:
+    build: ./desyra/back_end_desyra
+    container_name: desyra_backend
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000 # <--- AGGIUNGI O MODIFICA
+    environment:
+      DB_HOST: db
+      DB_USER: rikko2123
+      DB_PASSWORD: rikko
+      DB_NAME: desyra_db
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - db_net
+    volumes:
+      - ./desyra/back_end_desyra:/back_end_desyra
+
+volumes:
+  mysql_data:
+
+networks:
+  db_net:
