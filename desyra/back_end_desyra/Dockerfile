@@ -1,9 +1,16 @@
 #build fase
-FROM python:3.12 as builder
+FROM python:3.12 
+
+WORKDIR /back_end_desyra
+
+# Set environment variables 
+# Prevents Python from writing pyc files to disk
+ENV PYTHONDONTWRITEBYTECODE=1
+#Prevents Python from buffering stdout and stderr
+ENV PYTHONUNBUFFERED=1 
 
 #run aggiornamenti dei pacchetti linux
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y locales \
     #installo compilatore di c, senza i pacchetti raccomandati
     && apt-get install -y --no-install-recommends gcc \  
     #quando compilo un programma in c mi serve questa dipendenza per far capire al compilatore dove trovare librerie e header
@@ -13,40 +20,25 @@ RUN apt-get update && apt-get upgrade -y \
     #rimuovo file inutili che appesantiscono la build
     && rm -rf /var/lib/apt/lists/*
 
-#set locales
-RUN echo "it_IT.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen && \
-    update-locale LANG=it_IT.UTF-8
+#copy dependencies file
+COPY requirements.txt .
 
-WORKDIR /back_end_desyra
-
-#creo virtual env fase di build
-ENV VIRTUAL_ENV=/back_end_desyra/.venv
-RUN python -m venv back_end_desyra/.venv
-#metto dentro al path il percorso del vrtual env
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-COPY requirements.txt /back_end_desyra
+# Upgrade pip
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
 
-COPY .  /back_end_desyra
+# Copy the Django project  and install dependencies
+COPY . /back_end_desyra
 
-#stage fase
-FROM python:3.12-slim
+# run this command to install all dependencies 
+RUN pip install --no-cache-dir -r requirements.txt
 
-#punto virtual env su variabili d'ambiente
-ENV VIRTUAL_ENV=/back_end_desyra/.venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-#copio fle compilati nella fase di build 
-COPY --from=builder back_end_desyra/.venv back_end_desyra/.venv
-COPY --from=builder back_end_desyra back_end_desyra 
-
+# Expose the Django port
 EXPOSE 8000
 
-WORKDIR /back_end_desyra
-
+# Run Django’s development server 
+#todo DA CAMBIARE QUANDO FARO IL DEPLOY SU CLOUD
+# Start the application using Gunicorn
+#CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "my_docker_django_app.wsgi:application"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
