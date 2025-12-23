@@ -23,7 +23,7 @@ function Carusel() {
 
     
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/brand-product/')
+        fetch('http://localhost:8000/api/brand-product/')
         .then(response => response.json())
         .then(data => setBrand(data))
     }, [])
