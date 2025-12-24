@@ -1,7 +1,6 @@
-#build fase
 FROM python:3.12 
 
-WORKDIR /back_end_desyra
+WORKDIR /app
 
 # Set environment variables 
 # Prevents Python from writing pyc files to disk
@@ -10,9 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1 
 
 #run aggiornamenti dei pacchetti linux
-RUN apt-get update && apt-get upgrade -y \
+RUN  apt-get update && apt-get install -y \
+    #installo curl
+    && apt-get install -y curl \
     #installo compilatore di c, senza i pacchetti raccomandati
-    && apt-get install -y --no-install-recommends gcc \  
+    && apt-get install -y --no-install-recommends gcc \
     #quando compilo un programma in c mi serve questa dipendenza per far capire al compilatore dove trovare librerie e header
     pkg-config \
     default-libmysqlclient-dev \
@@ -27,7 +28,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 
 # Copy the Django project  and install dependencies
-COPY . /back_end_desyra
+COPY . /app
 
 # run this command to install all dependencies 
 RUN pip install --no-cache-dir -r requirements.txt
@@ -41,6 +42,8 @@ EXPOSE 8000
 #CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "my_docker_django_app.wsgi:application"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-
+#healthchek and end-point health, se curl -f = 200 allora container sano, altimenti exit
+HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost:8000/health || exit 1
 
 
