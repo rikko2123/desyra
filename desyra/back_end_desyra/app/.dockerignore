@@ -6,3 +6,4 @@ desyra/back_end_desyra/.venv
 .env
 _pycache_
 README.md
+Dockerfile
