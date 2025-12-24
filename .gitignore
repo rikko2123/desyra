@@ -5,3 +5,4 @@ __pycache__
 jet_bridge_store.*
 None
 .env
+.env.example
