@@ -21,7 +21,7 @@ RUN  apt-get update && apt-get install -y \
     #rimuovo file inutili che appesantiscono la build
     && rm -rf /var/lib/apt/lists/*
 
-#copy dependencies file
+#copy dependencies 
 COPY requirements.txt .
 
 # Upgrade pip
