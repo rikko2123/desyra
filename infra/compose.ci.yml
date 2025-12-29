@@ -21,7 +21,7 @@ services:
       - db_net
 
   be:
-    build: ./desyra/back_end_desyra
+    build: ../back_end_desyra/app
     depends_on:
       db:
         condition: service_healthy
