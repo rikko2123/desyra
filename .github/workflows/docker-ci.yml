@@ -103,6 +103,7 @@ jobs:
               echo "[+] Status code: $out"
               echo "[+] Retry n... ${i}/20"
               sleep 5
+            fi
           done
           echo "[+] Backend non raggiungibile.... :("
           exit 1
