@@ -60,6 +60,11 @@ jobs:
         run: |
           touch ./infra/.env
           {
+            echo "MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD"
+            echo "MYSQL_DATABASE=$DB_NAME"
+            echo "MYSQL_USER=$DB_USER"
+            echo "MYSQL_PASSWORD=$DB_PASSWORD"
+
             echo "DATABASE_HOST=$DB_HOST"
             echo "DATABASE_USERNAME=$DB_USER"
             echo "DATABASE_PASSWORD=$DB_PASSWORD"
