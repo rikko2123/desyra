@@ -20,10 +20,10 @@ jobs:
       # valido env var e secrets
       - name: Validate required env variables
         env:
-          DB_HOST: ${{ vars.DB_HOST }}
-          DB_USER: ${{ vars.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_PORT: ${{ vars.DB_PORT }}
+          DB_HOST: ${{ vars.DATABASE_HOST }}
+          DB_USER: ${{ vars.DATABASE_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DB_PORT: ${{ vars.DATABASE_PORT }}
 
         # creo script bash che mi valida le env 
         # itero per le env che ho definito nel job
