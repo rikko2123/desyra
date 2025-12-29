@@ -2,9 +2,9 @@ services:
   db:
     image: mysql:8.0
     healthcheck: 
-      test: ["CMD",  "mysqladmin ping -h localhost --silent"]
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 10
       start_period: 20s 
     env_file:
