@@ -5,7 +5,7 @@ from rest_framework import status
 from django.db import connection
 # Create your views here.
 
-class HealtCheck(APIView):
+class HealthCheck(APIView):
     
     def get(self, request):
         return Response(
