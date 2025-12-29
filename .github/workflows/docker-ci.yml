@@ -94,8 +94,19 @@ jobs:
           set -euo pipefail
           cd infra
           docker compose -f compose.ci.yml up -d --build
-          docker compose ps
-          sleep 10
-          curl -f http://localhost:8000/health || exit 1
+          for i in {1..20}; do
+            out=$(curl -w "%{http_code}" -o NUL -s http://localhost:8000/health)
+            if [ "$out" -eq 200 ]; then
+              echo "[+] Backend pronto..... tutto in check! DAJE"
+              exit 0
+            else
+              echo "[+] Status code: $out"
+              echo "[+] Retry n... ${i}/20"
+              sleep 5
+          done
+          echo "[+] Backend non raggiungibile.... :("
+          exit 1
+          
+
       
 

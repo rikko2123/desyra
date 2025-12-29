@@ -22,6 +22,7 @@ services:
         condition: service_healthy
     env_file:
       - .env
+    #bindo porta nella ci perche tento di raggiongere un endpoint tramite il runner
     ports:
       - "8000:8000"
     networks:
