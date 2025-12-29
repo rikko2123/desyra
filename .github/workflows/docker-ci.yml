@@ -95,7 +95,7 @@ jobs:
           cd infra
           docker compose -f compose.ci.yml up -d --build
           for i in {1..20}; do
-            out=$(curl -w "%{http_code}" -o /dev/null -s http://localhost:8000/health || true)
+            out=$(curl -w "%{http_code}" -o /dev/null -s http://localhost:8000/health/ || true)
             if [ "$out" -eq 200 ]; then
               echo "[+] Backend pronto..... tutto in check! DAJE"
               exit 0
