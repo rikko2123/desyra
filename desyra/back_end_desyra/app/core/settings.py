@@ -13,6 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # prendo il .env a due livelli sopra per arrivare dove sta il file .env
 ENV_PATH = BASE_DIR.parent.parent/".env"
 print(f"ENVVVVVVVV {ENV_PATH}")
+print("Test CI")
 load_dotenv(ENV_PATH)
 
 # SECURITY WARNING: keep the secret key used in production secret!
