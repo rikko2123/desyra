@@ -25,6 +25,8 @@ jobs:
           DB_USER: ${{ vars.DATABASE_USERNAME }}
           DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DB_PORT: ${{ vars.DATABASE_PORT }}
+          DB_NAME: ${{ vars.DATABASE_NAME }}
+          DB_ROOT_PASSWORD: ${{ secrets.DATABASE_ROOT_PASSWORD }}
 
         # creo script bash che mi valida le env 
         # itero per le env che ho definito nel job
@@ -32,7 +34,7 @@ jobs:
         # nel caso blocco flusso esecuzione test
         run: |
           echo "[+] Carico var d'ambiente...."
-          for v in DB_HOST DB_USER DB_PASSWORD DB_PORT; do
+          for v in DB_HOST DB_USER DB_PASSWORD DB_PORT DB_NAME DB_ROOT_PASSWORD; do
             if [ -z "${!v}" ]; then
               echo "[+] Variabile ${v} non trovata/non corretta... :("
               exit 1
@@ -47,13 +49,21 @@ jobs:
           DB_USER: ${{ vars.DATABASE_USERNAME }}
           DB_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DB_PORT: ${{ vars.DATABASE_PORT }}
+          DB_NAME: ${{ vars.DATABASE_NAME }}
+          DB_ROOT_PASSWORD: ${{ secrets.DATABASE_ROOT_PASSWORD }}
+
         run: |
-          cat <<EOF > .env
-          DB_HOST=$DB_HOST
-          DB_USER=$DB_USER
-          DB_PASSWORD=$DB_PASSWORD
-          DB_PORT=$DB_PORT
-          EOF
+          touch ./infra/.env
+          {
+            echo "DATABASE_HOST=$DB_HOST"
+            echo "DATABASE_USERNAME=$DB_USER"
+            echo "DATABASE_PASSWORD=$DB_PASSWORD"
+            echo "DATABASE_NAME=$DB_NAME"
+            echo "DATABASE_PORT=$DB_PORT"
+            echo "DATABASE_ROOT_PASSWORD=$DB_ROOT_PASSWORD"
+          } > ./infra/.env
+
+          echo "[+] Generato .env file....."
 
       #auth con token docker
       - name: Extract Docker image metadata
