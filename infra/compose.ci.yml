@@ -17,6 +17,8 @@ services:
 
   be:
     build: ../back_end_desyra/app
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
     depends_on:
       db:
         condition: service_healthy
