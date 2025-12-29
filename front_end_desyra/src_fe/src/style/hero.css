@@ -1,0 +1,137 @@
+.hero{
+    width: 100%;
+    height: 89vh;
+    position: relative;
+}
+
+.img-box{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.img-box > img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    object-position: center;
+}
+
+.overlay{
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0)); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-text-box{
+    display: flex;
+    color: whitesmoke;
+    flex-direction: column;
+    gap: 4rem;
+    margin-bottom: 15rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.text> h1 {
+    font-size: 5.5rem;
+}
+
+
+.nav_slide_box{
+    border: 1px solid black;
+}
+
+
+
+@media (max-width: 768px){
+    .text> h1 {
+        font-size: 3.0rem;
+    }
+    .text> span {
+        font-size: .8rem;
+    }
+}
+
+
+/* VIDEO SEC */
+
+.video-hero{
+    width: 100%;
+    height: 95vh;
+    position: relative;
+}
+
+.video-box{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.video-box > video{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    object-position: center;
+}
+
+.video-text-box{
+    display: flex;
+    color: whitesmoke;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.video-text> h1 {
+    font-size: 4rem;
+}
+
+
+/* SEC2-VIDEO */
+.sec-video-hero{
+    width: 100%;
+    height: 70vh;
+    position: relative;
+}
+
+.sec-video-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sec-video-text> h1 {
+    font-size: 3rem;
+}

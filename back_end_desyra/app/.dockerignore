@@ -1,0 +1,9 @@
+desyra/back_end_desyra/env_linux
+desyra/back_end_desyra/env_windows
+desyra/back_end_desyra/.venv
+
+.gitignore
+.env
+_pycache_
+README.md
+Dockerfile
