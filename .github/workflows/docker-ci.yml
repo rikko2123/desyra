@@ -5,10 +5,15 @@
 #avvia macchina temporanea 
 name: Build and Push Docker Image
 
+#trigger sulle push al branch manster
 on:
   push:
     branches: [ master ]
-  pull_request:
+    #solo in caso in cui vengono toccati file all'interno di queste dir core dell'infrastruttura
+    paths:
+      - "back_end_desyra/app/*"
+      - "infra/**"
+      - ".github/workflows/**"
 
 #estraggo i metadati dalla repo GIT
 jobs:
@@ -42,7 +47,7 @@ jobs:
           done 
           echo "[+] Tutte var corrette e settate"
 
-      #una volta validato le env creo file da passare al container
+      #una volta validato le env creo file da passare al compose
       - name: Create .env file
         env:
           DB_HOST: ${{ vars.DATABASE_HOST }}
@@ -82,9 +87,10 @@ jobs:
       - name: Start containers
         run: |
           set -euo pipefail
-          docker compose -f ./infra/compose.ci.yml up -d --build
+          cd infra
+          docker compose -f compose.ci.yml up -d --build
           docker compose ps
           sleep 10
-          curl -f http://localhost:8000/health
+          curl -f http://localhost:8000/health || exit 1
       
 

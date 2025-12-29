@@ -42,8 +42,6 @@ EXPOSE 8000
 #CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "my_docker_django_app.wsgi:application"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-#healthchek and end-point health, se curl -f = 200 allora container sano, altimenti exit
-HEALTHCHECK --interval=30s --timeout=3s \
-    CMD curl -f http://localhost:8000/health || exit 1
+
 
 
